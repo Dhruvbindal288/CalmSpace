@@ -34,7 +34,7 @@ app.use("/api/chat", chatRoutes);
 app.use(express.static(path.join(__dirname, "/frontend/dist")));
 
 //Catching all route to build react app
-app.get("*", (req, res) => {
+app.get(/^(?!\/api).*/, (req, res) => {
   res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
 });
 
