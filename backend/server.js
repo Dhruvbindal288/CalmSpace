@@ -9,7 +9,7 @@ import diaryRoutes from "./src/routes/diary.route.js";
 import chatRoutes from "./src/routes/chat.route.js";
 import connectDB from "./src/lib/db.js";
 
-
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
