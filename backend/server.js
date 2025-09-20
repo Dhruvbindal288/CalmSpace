@@ -1,4 +1,4 @@
-// In backend/server.js
+
 
 import express from "express";
 import dotenv from "dotenv";
@@ -8,7 +8,7 @@ import path from "path";
 import authRoutes from "./routes/auth.route.js";
 import diaryRoutes from "./routes/diary.route.js";
 import chatRoutes from "./routes/chat.route.js";
-import connectToMongoDB from "./db/connectToMongoDB.js";
+import connectToMongoDB from "./db/db.js";
 
 dotenv.config();
 
