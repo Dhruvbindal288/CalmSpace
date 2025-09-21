@@ -8,7 +8,7 @@ import authRoutes from "./src/routes/auth.route.js";
 import diaryRoutes from "./src/routes/diary.route.js";
 import chatRoutes from "./src/routes/chat.route.js";
 import connectDB from "./src/lib/db.js";
-
+import quoteRouter from './src/routes/quote.route.js'
 dotenv.config();
 
 const app = express();
