@@ -30,12 +30,11 @@ app.use("/api/diary", diaryRoutes);
 app.use("/api/chat", chatRoutes);
 
 
-app.use(express.static(path.join(__dirname, "frontend", "dist")));
+app.use(express.static(path.join(__dirname, "..", "frontend", "build")));
 
 app.get(/^(?!\/api).*/, (req, res) => {
-  res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
+  res.sendFile(path.join(__dirname, "..", "frontend", "build", "index.html"));
 });
-
 
 const startServer = async () => {
   try {
