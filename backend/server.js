@@ -14,7 +14,6 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -25,23 +24,22 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-
+// JSON parser
 app.use(express.json());
 
-
+// --- API Routes ---
 app.use("/api/auth", authRoutes);
 app.use("/api/diary", diaryRoutes);
 app.use("/api/chat", chatRoutes);
 
 
-const frontendPath = path.join(__dirname, "..", "frontend", "build");
+const frontendPath = path.join(__dirname, "..", "frontend", "dist");
 app.use(express.static(frontendPath));
 
- 
+
 app.get(/^(?!\/api).*/, (req, res) => {
   res.sendFile(path.join(frontendPath, "index.html"));
 });
-
 
 const startServer = async () => {
   try {
