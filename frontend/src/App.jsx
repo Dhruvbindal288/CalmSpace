@@ -8,19 +8,19 @@ import Signup from "./pages/Signup";
 import NewDiary from "./pages/NewDiary";
 import Chat from "./pages/Chat";
 import Diary_id from "./pages/Diary_id";
-import UpdateDiary from "./pages/UpdateDiary"; // 1. Import the new UpdateDiary page
+import UpdateDiary from "./pages/UpdateDiary"; 
 
-// Component Imports
+
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 
-// Hook Imports
+
 import { useAuthUser } from "./hooks/useAuthUser";
 
 function App() {
   const { data: user, isLoading } = useAuthUser();
 
-  // Initial loading screen for the whole app
+ 
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -32,14 +32,13 @@ function App() {
   return (
     <div>
       <Navbar user={user} />
-      <div className="pt-14"> {/* Padding to offset the fixed navbar */}
+      <div className="pt-14"> 
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={<Home />} />
           <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
           <Route path="/signup" element={user ? <Navigate to="/" /> : <Signup />} />
 
-          {/* Protected Routes */}
           <Route
             path="/diary"
             element={user ? <Diary /> : <Navigate to="/login" replace />}
@@ -53,7 +52,7 @@ function App() {
             element={user ? <NewDiary /> : <Navigate to="/login" replace />}
           />
           
-          {/* 2. THE NEW ROUTE: This handles the page for updating a specific diary entry. */}
+         
           <Route
             path="/diary/update/:id"
             element={user ? <UpdateDiary /> : <Navigate to="/login" replace />}

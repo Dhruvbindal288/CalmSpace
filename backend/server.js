@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
-
+import cookieParser from "cookie-parser";
 import authRoutes from "./src/routes/auth.route.js";
 import diaryRoutes from "./src/routes/diary.route.js";
 import chatRoutes from "./src/routes/chat.route.js";
@@ -26,7 +26,7 @@ app.use(cors(corsOptions));
 
 // JSON parser
 app.use(express.json());
-
+app.use(cookieParser())
 // --- API Routes ---
 app.use("/api/auth", authRoutes);
 app.use("/api/diary", diaryRoutes);
