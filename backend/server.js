@@ -1,8 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import path from "path"; 
-
+import path from "path";
+import { fileURLToPath } from "url";
 
 import authRoutes from "./src/routes/auth.route.js";
 import diaryRoutes from "./src/routes/diary.route.js";
@@ -14,18 +14,17 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-
-const __dirname = path.resolve();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const corsOptions = {
-  
-  origin: ['http://localhost:3000', 'https://calmspace-vjkj.onrender.com'], 
+  origin: ['http://localhost:3000', 'https://calmspace-vjkj.onrender.com'],
   credentials: true,
 };
 app.use(cors(corsOptions));
 app.use(express.json());
 
-// --- API Routes ---
+// API routes
 app.use("/api/auth", authRoutes);
 app.use("/api/diary", diaryRoutes);
 app.use("/api/chat", chatRoutes);
@@ -33,13 +32,20 @@ app.use("/api/chat", chatRoutes);
 
 app.use(express.static(path.join(__dirname, "frontend", "dist")));
 
-
-
 app.get(/^(?!\/api).*/, (req, res) => {
   res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
 });
 
-app.listen(PORT, () => {
-  connectDB();
-  console.log(`Server running on port ${PORT}`);
-});
+
+const startServer = async () => {
+  try {
+    await connectDB();
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  } catch (err) {
+    console.error("Failed to connect DB", err);
+  }
+};
+
+startServer();
