@@ -31,7 +31,7 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/diary", diaryRoutes);
 app.use("/api/chat", chatRoutes);
-
+app.use("/api/quote", quoteRouter);
 
 const frontendPath = path.join(__dirname, "..", "frontend", "dist");
 app.use(express.static(frontendPath));
